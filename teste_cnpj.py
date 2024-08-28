@@ -108,6 +108,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         # self.bt_verificar.clicked.connect(self.verificar_cnpj)
         self.txt_cnpj.editingFinished.connect(self.validar_e_mascarar_cnpj)
+        self.txt_cnpj.textEdited.connect(self.limpar_mensagem)
 
     def validar_e_mascarar_cnpj(self):
         """Valida o CNPJ inserido pelo usuário e exibe a mensagem correspondente."""
@@ -121,6 +122,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lb_texto.setText(f"O CNPJ {cnpj_formatado} é válido.")
         else:
             self.lb_texto.setText(f"O CNPJ {cnpj} é inválido.")
+
+    def limpar_mensagem(self):
+        """Limpa a mensagem do label."""
+        self.lb_texto.setText("")
 
 
 if __name__ == "__main__":
