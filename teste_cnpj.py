@@ -107,9 +107,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         # self.bt_verificar.clicked.connect(self.verificar_cnpj)
-        self.txt_cnpj.editingFinished.connect(self.verificar_cnpj)
+        self.txt_cnpj.editingFinished.connect(self.validar_e_mascarar_cnpj)
 
-    def verificar_cnpj(self):
+    def validar_e_mascarar_cnpj(self):
         """Valida o CNPJ inserido pelo usuário e exibe a mensagem correspondente."""
         cnpj = self.txt_cnpj.text()
         cnpj = "".join([c for c in cnpj if c.isdigit()])
@@ -117,6 +117,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             cnpj_formatado = (
                 f"{cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}"
             )
+            self.txt_cnpj.setText(cnpj_formatado)
             self.lb_texto.setText(f"O CNPJ {cnpj_formatado} é válido.")
         else:
             self.lb_texto.setText(f"O CNPJ {cnpj} é inválido.")
