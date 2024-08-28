@@ -116,7 +116,14 @@ def validar_cnpj(cnpj):
         resto = 11 - (soma % 11)
         if resto >= 10:
             resto = 0
-        cnpj_para_verificar += str(resto)
+
+        # Ajuste para iniciar a verificação do segundo dígito
+        # a partir dos 12 primeiros dígitos do CNPJ:
+        if i == 0:
+            cnpj_para_verificar = cnpj[:12] + str(resto)
+        else:
+            cnpj_para_verificar += str(resto)
+
         multiplicadores.insert(0, 6)
 
     return cnpj == cnpj_para_verificar
